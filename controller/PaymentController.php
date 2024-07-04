@@ -85,11 +85,11 @@ class PaymentController
 
     header('Location: ' . $jsonResult['payUrl']);
   }
-  public function insertOrders($customer_id, $shipping_phone, $shipping_adress, $total_amount, $order_date, $payment_method, $note, $state)
+  public function insertOrders($order_code, $customer_id, $shipping_receiver, $shipping_phone, $shipping_adress, $total_amount, $order_date, $payment_method, $note, $state)
   {
     $db = new Database();
-    $sql = "INSERT INTO orders (customer_id, shipping_phone, shipping_address, total_amount,order_date, payment_method, note, state)
-    VALUES ('$customer_id','$shipping_phone', '$shipping_adress', '$total_amount', '$order_date','$payment_method', '$note', '$state')";
+    $sql = "INSERT INTO orders (order_code, customer_id, shipping_receiver, shipping_phone, shipping_address, total_amount,order_date, payment_method, note, state)
+    VALUES ('$order_code','$customer_id','$shipping_receiver','$shipping_phone', '$shipping_adress', '$total_amount', '$order_date','$payment_method', '$note', '$state')";
     return $db->insert_lastid($sql);
   }
   public function insertOrdersDetail($order_id, $product_id, $quantity, $price)
@@ -103,6 +103,7 @@ class PaymentController
 $payment = new PaymentController;
 if (isset($_POST['submit'])) {
   $customer_id = $_POST['customer_id'];
+  $shipping_receiver = $_POST['shipping_receiver'];
   $shipping_phone = $_POST['shipping_phone'];
   $shipping_address = $_POST['shipping_address'];
   $total_amount = $_POST['total_amount'];
@@ -110,9 +111,10 @@ if (isset($_POST['submit'])) {
   $note = isset($_POST['note']) ? $_POST['note'] : '';
   $products = $_POST['products'];
   $state = 1;
+  $order_code= 'EW-'.rand(10,99).chr(rand(65,90)). chr(rand(65, 90)). rand(10, 99);
   if (isset($_POST['payUrl'])) {
     $payment_method = 'Momo';
-    $order_id = $payment->insertOrders($customer_id, $shipping_phone, $shipping_address, $total_amount, $order_date, $payment_method, $note, $state);
+    $order_id = $payment->insertOrders($order_code,$customer_id, $shipping_receiver, $shipping_phone, $shipping_address, $total_amount, $order_date, $payment_method, $note, $state);
     foreach ($products as $product) {
       $product_id = $product['id'];
       $price = $product['price'];
@@ -123,7 +125,7 @@ if (isset($_POST['submit'])) {
   } else 
   if (isset($_POST['COD'])) {
     $payment_method = 'COD';
-    $order_id = $payment->insertOrders($customer_id, $shipping_phone, $shipping_address, $total_amount, $order_date, $payment_method, $note, $state);
+    $order_id = $payment->insertOrders($order_code, $customer_id, $shipping_receiver, $shipping_phone, $shipping_address, $total_amount, $order_date, $payment_method, $note, $state);
     foreach ($products as $product) {
       $product_id = $product['id'];
       $price = $product['price'];

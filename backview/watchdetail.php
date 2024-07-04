@@ -82,8 +82,8 @@ if (isset($_POST['capnhat'])) {
           <div class="form-floating mb-3">
             <select class="form-select pb-2" id="status" name="status" aria-label="Floating label select example">
               <option selected disabled></option>
-              <option value="1">Normal</option>
-              <option value="2">Limited</option>
+              <option value="0">Normal</option>
+              <option value="1">Limited</option>
             </select>
             <label for="floatingSelect">Trạng thái</label>
           </div>

@@ -54,7 +54,7 @@ if (isset($_SESSION['success']) && ($_SESSION['success'] == 2)) {
               $totalItems = $product->countProduct(null, null, null, null, null);
               $totalPages = ceil($totalItems[0]['count'] / $limit);
               $row = $product->getProduct(null, null, null, null, null, $start, $limit);
-              $i = 1;
+              $i = ($currentPage - 1) * $limit + 1;
               foreach ($row as $data) {
                 switch ($data->idSupplier) {
                   case '1':

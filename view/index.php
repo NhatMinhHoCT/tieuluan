@@ -60,11 +60,11 @@ include "header_nav.php";
                 <span class="text-dark" style="width: 130px;">Nổi bật</span>
               </a>
             </li> -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
                 <span class="text-dark" style="width: 130px;">Bán chạy</span>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">
                 <span class="text-dark" style="width: 130px;">Bản giới hạn</span>
@@ -281,7 +281,7 @@ include "header_nav.php";
             </div>
           </div>
         </div> -->
-        <div id="tab-4" class="tab-pane fade show p-0">
+        <!-- <div id="tab-4" class="tab-pane fade show p-0">
           <div class="row g-4">
             <div class="col-lg-12">
               <div class="row g-4">
@@ -348,7 +348,7 @@ include "header_nav.php";
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div id="tab-5" class="tab-pane fade show p-0">
           <div class="row g-4">
             <div class="col-lg-12">

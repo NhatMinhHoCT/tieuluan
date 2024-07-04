@@ -6,7 +6,7 @@
   use Controller\PaginationController;
 
   ?>
- < <div class="container-fluid py-5">
+ <div class="container-fluid py-5">
    <div class="container py-5">
      <div class="pb-5">
        <ol class="breadcrumb mb-0">
@@ -84,7 +84,6 @@
                   echo '</div>';
                 }
                 ?>
-
                <div class="col-12">
                  <?php
                   $queryParams = array(
@@ -205,27 +204,27 @@
        </div>
      </div>
    </div>
-   </div>
-   <script>
-     $(document).ready(function() {
-       $('.supplier_search').each(function() {
-         if ($.inArray($(this).val(), <?php echo isset($_GET['supplier']) ? json_encode($_GET['supplier']) : "" ?>) > -1) {
-           $(this).prop('checked', true);
-         }
-       });
-       $('.chain_search').each(function() {
-         if ($.inArray($(this).val(), <?php echo isset($_GET['chain']) ? json_encode($_GET['chain']) : "" ?>) > -1) {
-           $(this).prop('checked', true);
-         }
-       });
-       $('.price_search').each(function() {
-         $('#search').val('<?php echo $_GET['search'] ?? "" ?>');
-         if ($.inArray($(this).val(), <?php echo isset($_GET['price']) ? json_encode($_GET['price']) : "" ?>) > -1) {
-           $(this).prop('checked', true);
-         }
-       });
+ </div>
+ <script>
+   $(document).ready(function() {
+     $('.supplier_search').each(function() {
+       if ($.inArray($(this).val(), <?php echo isset($_GET['supplier']) ? json_encode($_GET['supplier']) : "" ?>) > -1) {
+         $(this).prop('checked', true);
+       }
      });
-   </script>
-   <?php
-    include "footer.php";
-    ?>
+     $('.chain_search').each(function() {
+       if ($.inArray($(this).val(), <?php echo isset($_GET['chain']) ? json_encode($_GET['chain']) : "" ?>) > -1) {
+         $(this).prop('checked', true);
+       }
+     });
+     $('.price_search').each(function() {
+       $('#search').val('<?php echo $_GET['search'] ?? "" ?>');
+       if ($.inArray($(this).val(), <?php echo isset($_GET['price']) ? json_encode($_GET['price']) : "" ?>) > -1) {
+         $(this).prop('checked', true);
+       }
+     });
+   });
+ </script>
+ <?php
+  include "footer.php";
+  ?>

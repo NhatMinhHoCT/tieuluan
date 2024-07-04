@@ -65,21 +65,17 @@
               echo '<span class="d-none d-lg-inline-flex">' . $_SESSION['username'] . '</span></a>
              <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                <a href="account_personal.php" class="dropdown-item">Tài khoản cá nhân</a>
-               <a href="account_changepass.php" class="dropdown-item">Đổi mật khẩu</a>
                <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?logout=1" class="dropdown-item">Thoát</a>
              </div>
            </div>';
             }
             ?>
-
-
-
-
          </div>
        </div>
      </nav>
    </div>
  </div>
+ <div id="toast"></div>
  <script>
    $(document).ready(function() {
      $('.nav-link').each(function() {

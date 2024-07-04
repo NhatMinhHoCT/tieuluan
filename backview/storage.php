@@ -1,6 +1,6 @@
 <?php
 include "header.php";
-$page_title = "donhang";
+$page_title = "kho";
 include "navside.php";
 
 use Controller\OrderController;
@@ -80,7 +80,7 @@ $orders = new OrderController();
                         };
                         echo $stage_text ?></td>
                     <td>
-                      <a href="order_detail.php?id=<?php echo $data->idOrder ?>" class="btn btn-md bg-success border" title="Chi tiết">
+                      <a href="" class="btn btn-md bg-success border" title="Chi tiết">
                         <i class="fa fa-pen text-light "></i>
                       </a>
                       <a href="" class="btn btn-md bg-danger border" title="Xóa">

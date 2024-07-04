@@ -1,5 +1,27 @@
 <?php
 include "header.php";
+require_once "../vendor/autoload.php";
+
+use Controller\AccountController;
+
+$list = new AccountController();
+session_start();
+if (isset($_SESSION['notification']) && ($_SESSION['notification'] == 1)) {
+  echo "<script>
+    setTimeout(function() {
+      showToast('Hello World', 'This is a test toast', 'info');
+    }, 200);
+  </script>";
+
+  unset($_SESSION['notification']);
+}
+if (isset($_POST['dangnhap'])) {
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  if ($list->checklogin($username, $password)) {
+    header("Location: index.php");
+  }
+}
 ?>
 
 <!-- Sign In Start -->
@@ -13,35 +35,26 @@ include "header.php";
           </a>
           <h3 class="text-light">Đăng nhập</h3>
         </div>
-        <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="floatingInput" placeholder="Tên đăng nhập">
-          <label for="floatingInput">Tên đăng nhập</label>
-        </div>
-        <div class="form-floating mb-4">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Mật khẩu">
-          <label for="floatingPassword">Mật khẩu</label>
-        </div>
-        <button type="submit" class="btn btn-light py-3 w-100 mb-4">Đăng nhập</button>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="username" name="username" placeholder="Tên đăng nhập">
+            <label for="username">Tên đăng nhập</label>
+          </div>
+          <div class="form-floating mb-4">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu">
+            <label for="password">Mật khẩu</label>
+          </div>
+          <button type="submit" name="dangnhap" class="btn btn-light py-3 w-100 mb-4">Đăng nhập</button>
+          <p class="text-center text-light mb-0">Chưa có tài khoản? <a href="signup.php" class="text-light fw-bold fs-5 ">Đăng ký</a></p>
+        </form>
       </div>
     </div>
   </div>
 </div>
 <!-- Sign In End -->
 </div>
-
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="lib/chart/chart.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/waypoints/waypoints.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="lib/tempusdominus/js/moment.min.js"></script>
-<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-<!-- Template Javascript -->
-<script src="js/main.js"></script>
+<div id="toast"></div>
+<script src="../include/js/main.js"></script>
 </body>
 
 </html>

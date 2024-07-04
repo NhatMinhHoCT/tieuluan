@@ -24,7 +24,7 @@ $account_data = $account->getAccountInfo($_SESSION['user_id']);
             <div class="col-md-12 col-lg-6">
               <div class="form-item w-100">
                 <label class="form-label my-3 fw-bolder">Tên khách hàng</label>
-                <input type="text" class="form-control" value="<?php echo $account_data[0]['guestname'] ?>">
+                <input type="text" class="form-control" id="shipping_receiver" name="shipping_receiver" value="<?php echo $account_data[0]['guestname'] ?>">
                 <input type="hidden" id="customer_id" name="customer_id" value="<?php echo $account_data[0]['account_id'] ?>">
               </div>
             </div>
@@ -68,8 +68,7 @@ $account_data = $account->getAccountInfo($_SESSION['user_id']);
               }
               ?>
               <tbody>
-                <?php foreach ($cartItems as $index => $data) {
-                  var_dump($data) ?>
+                <?php foreach ($cartItems as $index => $data) { ?>
                   <input type="hidden" name="products[<?php echo $index; ?>][id]" value="<?php echo $data['id']; ?>">
                   <input type="hidden" name="products[<?php echo $index; ?>][price]" value="<?php echo $data['price']; ?>">
                   <input type="hidden" name="products[<?php echo $index; ?>][quantity]" value="<?php echo $data['quantity']; ?>">
@@ -97,24 +96,24 @@ $account_data = $account->getAccountInfo($_SESSION['user_id']);
                 <tr>
                   <th scope="row">
                   </th>
-                  <td class="py-3"></td>
-                  <td class="py-3" colspan="2">
-                    <p class="mb-0 text-dark py-3">Thuế VAT</p>
+                  <td class=""></td>
+                  <td class="" colspan="2">
+                    <p class="mb-0 text-dark ">Thuế VAT</p>
                   </td>
-                  <td class="py-3 text-end">
-                    <p class="mb-0 text-dark py-3"><?php echo isset($total) ? number_format($total * 0.1, 0, ',', '.') : '0'; ?></p>
+                  <td class=" text-end">
+                    <p class="mb-0 text-dark "><?php echo isset($total) ? number_format($total * 0.1, 0, ',', '.') : '0'; ?></p>
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">
                   </th>
-                  <td class="py-3">
-                    <p class="mb-0 text-dark text-uppercase py-3 fs-5 fw-bold">Tổng cộng</p>
+                  <td class="">
+                    <p class="mb-0 text-dark text-uppercase fs-5 fw-bold">Tổng cộng</p>
                   </td>
-                  <td class="py-3"></td>
-                  <td class="py-3"></td>
-                  <td class="py-3 text-end">
-                    <div class="py-3 text-end">
+                  <td class=""></td>
+                  <td class=""></td>
+                  <td class=" text-end">
+                    <div class=" text-end">
                       <p class="mb-0 text-dark"><?php echo isset($total) ? number_format($total * 1.1, 0, ',', '.') : '0'; ?></p>
                       <input type="text" name="total_amount" id="total_amount" value="<?php echo isset($total) ? number_format($total * 1.1, 0, ',', '.') : '0'; ?>" hidden>
                     </div>
@@ -126,9 +125,9 @@ $account_data = $account->getAccountInfo($_SESSION['user_id']);
           <div>
             <!-- <form action="../controller/PaymentController.php" method="POST"> -->
             <p>Chọn phương thức thanh toán</p>
-            <div class="row g-4 text-center align-items-center justify-content-center py-3">
+            <div class="row g-4 text-center align-items-center justify-content-center">
               <div class="col-12">
-                <div class="form-check text-start my-3">
+                <div class="form-check text-start ">
                   <input type="checkbox" class="form-check-input" id="COD" name="COD" value="COD">
                   <label class="form-check-label" for="Delivery-1">Thanh toán COD</label>
                 </div>
@@ -136,7 +135,7 @@ $account_data = $account->getAccountInfo($_SESSION['user_id']);
             </div>
             <div class="row g-4 text-center align-items-center justify-content-center py-3">
               <div class="col-12">
-                <div class="form-check text-start my-3">
+                <div class="form-check text-start">
                   <input type="checkbox" class="form-check-input" id="payUrl" name="payUrl" value="payUrl">
                   <label class="form-check-label" for="payUrl">Thanh toán qua MoMo</label>
                 </div>

@@ -1,12 +1,22 @@
 <?php
 require "../vendor/autoload.php";
 session_start();
+if (!isset($_SESSION['username']) ) {
+  echo "<script>window.location.href='signin.php'</script>";
+} else if(isset($_SESSION['role']) && ($_SESSION['role']!="1")) {
+  echo "<script>window.location.href='signin.php'</script>";
 
+}
+if (isset($_GET['logout']) && $_GET['logout'] == 1) {
+  session_unset();
+  session_destroy();
+  header("Location: signin.php");
+}
 ?>
 <!-- Sidebar Start -->
 <div class="sidebar bg-light pe-4 pb-3 py-2">
   <nav class="navbar navbar-dark">
-    <a href="index.html" class="navbar-brand mx-4 mb-3">
+    <a href="index.php" class="navbar-brand mx-4 mb-3">
       <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i></h3>
     </a>
     <!-- <div class="d-flex align-items-center ms-4 mb-4">
@@ -33,6 +43,7 @@ session_start();
       </div> -->
       <a href="accountmanagement.php" class="nav-item nav-link <?php echo $page_title == 'taikhoan' ? 'active' : '' ?>"><i class="fa fa-users me-2"></i>Tài khoản</a>
       <a href="ordermanagement.php" class="nav-item nav-link <?php echo $page_title == 'donhang' ? 'active' : '' ?>"><i class="fa fa-shopping-bag me-2"></i>Đơn hàng</a>
+      <a href="storage.php" class="nav-item nav-link <?php echo $page_title == 'kho' ? 'active' : '' ?>"><i class="fa fa-warehouse me-2"></i>Kho hàng</a>
       <a href="suppliermanage.php" class="nav-item nav-link <?php echo $page_title == 'nhacungcap' ? 'active' : '' ?>"><i class="fa fa-table me-2"></i>Nhà cung cấp</a>
       <!-- <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a> -->
       <!-- <div class="nav-item dropdown">
@@ -64,13 +75,13 @@ session_start();
       <button id="timkiem" class="btn btn-primary mx-2" name="timkiem"><i class="fa fa-search text-light"></i></button>
     </form>
     <div class="navbar-nav align-items-center ms-auto">
-      <div class="nav-item dropdown">
+      <!-- <div class="nav-item dropdown">
         <a href="#" class="nav-link" data-bs-toggle="dropdown">
           <i class="fa fa-bell fa-2x"></i>
           <span class="position-absolute bg-danger rounded-circle d-flex align-items-center justify-content-center text-light px-1" style="top: 0px; left: 50px; height: 20px; min-width: 20px;">3</span>
 
-          <!-- <i class="fa fa-bell me-lg-2"></i>
-          <span class="d-none d-lg-inline-flex">Thông báo</span> -->
+          <i class="fa fa-bell me-lg-2"></i>
+          <span class="d-none d-lg-inline-flex">Thông báo</span>
         </a>
         <div class="dropdown-menu dropdown-menu-end  border-0 rounded-0 rounded-bottom m-0">
           <a href="#" class="dropdown-item">
@@ -90,15 +101,15 @@ session_start();
           <hr class="dropdown-divider">
           <a href="#" class="dropdown-item text-center">See all notifications</a>
         </div>
-      </div>
+      </div> -->
       <div class="nav-item dropdown">
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-          <img class="rounded-circle me-lg-2" src="" alt="" style="width: 40px; height: 40px;">
+          <img class="rounded-circle me-lg-2" src="../include/img/New folder/456322.webp" alt="" style="width: 40px; height: 40px;">
           <span class="d-none d-lg-inline-flex">Nhật Minh</span>
         </a>
         <div class="dropdown-menu dropdown-menu-end  border-0 rounded-0 rounded-bottom m-0">
-          <a href="#" class="dropdown-item">Tài khoản của tôi</a>
-          <a href="#" class="dropdown-item">Đăng xuất</a>
+          <!-- <a href="#" class="dropdown-item">Tài khoản của tôi</a> -->
+          <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>?logout=1" class="dropdown-item">Đăng xuất</a>
         </div>
       </div>
     </div>

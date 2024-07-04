@@ -12,7 +12,7 @@
          <h3 class="mb-4 text-secondary">Đặt hàng thành công</h3>
          <p class="fs-5">Cảm ơn quý khách đã đặt mua hàng. </p>
          <p class="fs-5">Chúng tôi sẽ sắp xếp giao hàng trong thời gian sớm nhất</p>
-         <a class="btn btn-outline-primary py-3 " href="index.php">Chi tiết đơn hàng</a>
+         <a class="btn btn-outline-primary py-3 " href="account_personal.php">Chi tiết đơn hàng</a>
          <a class="btn btn-outline-secondary py-3 " href="index.php">Về trang chủ</a>
        </div>
      </div>

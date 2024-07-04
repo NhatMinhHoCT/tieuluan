@@ -1,22 +1,23 @@
 <?php
+namespace Model;
 class Account
 {
-  public $idAccount;
+  public $account_id;
   public $username;
   public $password;
   public $email;
-  public $createday;
+  public $createdate;
   public $avatar;
   public $guestname;
   public $phone;
   public $address;
-  public function __construct($idAccount, $username, $password, $email, $createday, $avatar, $guestname, $phone, $address)
+  public function __construct($account_id, $username, $password, $email, $createdate, $avatar, $guestname, $phone, $address)
   {
-    $this->idAccount = $idAccount;
+    $this->account_id = $account_id;
     $this->username = $username;
     $this->password = $password;
     $this->email = $email;
-    $this->createday = $createday;
+    $this->createdate = $createdate;
     $this->avatar = $avatar;
     $this->guestname = $guestname;
     $this->phone = $phone;
