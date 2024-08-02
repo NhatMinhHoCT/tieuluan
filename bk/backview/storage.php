@@ -1,0 +1,123 @@
+<?php
+include "header.php";
+$page_title = "kho";
+include "navside.php";
+
+use Controller\StorageController;
+if(isset($_SESSION['success']) && ($_SESSION['success']==1)){
+  echo '<script>
+  setTimeout(function () {
+  showToast("Thành công","Thông tin đã được cập nhật","success");
+  },100)
+  </script>';
+  unset($_SESSION['success']);
+}
+
+?>
+
+
+
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col-12">
+      <div class="rounded h-100 p-4">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="GET">
+          <div class="row">
+            <div class="col-8">
+              <a href="storage_import.php" class="btn btn-outline-primary mb-3" name="themmoi" id="themmoi">Nhập hàng</a>
+            </div>
+            <div class=" d-flex col-4 mb-3">
+              <input id="search" type="search" name="search" class="form-control" placeholder="Tìm kiếm" aria-describedby="search-icon-1" value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>">
+              <button type="submit" class="btn btn-outline-primary mx-2"><i class="fa fa-search"></i></button>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" type="submit" class="btn btn-outline-dark"><i class="fa fa-eraser"></i></a>
+            </div>
+          </div>
+        </form>
+        <div class="table-responsive">
+          <table class="table text-start align-middle table-bordered table-hover mb-0">
+            <thead>
+              <tr class="text-primary">
+                <!-- <th scope="col">Hình ảnh</th> -->
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Nhà cung cấp</th>
+                <th scope="col">Số lượng trong kho</th>
+                <!-- <th scope="col">Thao tác</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $storage = new StorageController();
+              $limit = 5;
+              $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+              $start = ($currentPage - 1) * $limit;
+              if (isset($_GET['search'])) {
+                $search = $_GET['search'] ?? null;
+                $row = $storage->getStorage($search, $start, $limit);
+                $totalItems = $storage->countStorage($search)['0']['count'];
+              } else {
+                $row = $storage->getStorage(null, $start, $limit);
+                $totalItems = $storage->countStorage(null)['0']['count'];
+              }
+              $totalPages = ceil($totalItems / $limit);
+              if ($row != null) {
+                foreach ($row as $data) {
+              ?>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center mt-2">
+                        <img src="../include/upload/<?php echo $data['image'] ?>" class="img-fluid" style="width: 75px; height: 90px;" alt="">
+                      </div>
+                    </td>
+                    <td><?php echo $data['name'] ?></td>
+                    <td><?php echo $data['nameSupplier'] ?></td>
+                    <td><?php echo $data['quantity']?></td>
+                    <!-- <td>
+                      <a href="" class="btn btn-md bg-success border" title="Chi tiết">
+                        <i class="fa fa-pen text-light "></i>
+                      </a>
+                      <a href="" class="btn btn-md bg-danger border" title="Xóa">
+                        <i class="fa fa-trash text-light"></i>
+                      </a>
+                    </td> -->
+                  </tr>
+              <?php
+                }
+              }
+              ?>
+            </tbody>
+          </table>
+          <div class="col-12">
+            <?php
+            $queryParams = array(
+              'search' => $_GET['search'] ?? '',
+            );
+            $query = http_build_query($queryParams);
+            echo '<div class="pagination d-flex justify-content-center mt-5">';
+            if ($currentPage > 1) {
+              $prevPage = $currentPage - 1;
+              echo '<a href="?' . $query . '&page=' . $prevPage . '" class="rounded">&laquo;</a>';
+            }
+            for ($i = 1; $i <= $totalPages; $i++) {
+              $activeClass = ($i == $currentPage) ? 'active' : '';
+              echo '<a href="?' . $query . '&page=' . $i . '" class="rounded ' . $activeClass . '">' . $i . '</a>';
+            }
+            if ($currentPage < $totalPages) {
+              $nextPage = $currentPage + 1;
+              echo '<a href="?' . $query . '&page=' . $nextPage . '" class="rounded">&raquo;</a>';
+            }
+            echo '</div>';
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Table End -->
+
+
+<?php
+include "footer.php"
+?>
